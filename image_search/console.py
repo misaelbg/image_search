@@ -1,4 +1,4 @@
-from engine import Bing
+from . import Bing, Google
 import argparse
 
 def main():
@@ -19,9 +19,9 @@ def main():
     args = parser.parse_args()
 
     if str(args.engine).lower() == 'google':
-        search_engine = None
+        search_engine = Google.Engine()
     elif str(args.engine).lower() == 'bing':
-        search_engine = Bing()
+        search_engine = Bing.Engine()
     
     results = search_engine.search_images(
         query=args.query, delta=int(args.limit), adult_content=args.adult_filter)

@@ -7,7 +7,7 @@ import lxml.html
 import requests
 import json
 
-class Bing:
+class Engine:
     """ Bing Engine Soup """
     def __init__(self):
         self.bing_url = "https://www.bing.com/images/async"
