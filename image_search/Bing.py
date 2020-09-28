@@ -16,14 +16,14 @@ class Engine:
         return {"User-Agent": get_random_user_agent()}
     
     def set_payload(self, q: str, first: int, adlt: str):
-        return (("q", str(q)), ("first", first), ("adlt", adlt))
+        return (("q", urlparse.quote_plus(q)), ("first", first), ("adlt", adlt))
     
     def get_image_link(self, page_content):
         page_content = page_content.get("m").replace('\r\n', "")
         page_content = json_parse(page_content)
         return page_content.get('murl')
         
-    def search_images(self, query: str, delta: int, adult_content: bool=False):
+    def search_images(self, query: str, delta: int=5, adult_content: bool=False):
         image_links = []
         adult_content = "on" if adult_content else "off"
         search_delta = 0
@@ -49,4 +49,3 @@ class Engine:
                 page_counter += 1
                 
         return image_links
-            
