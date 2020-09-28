@@ -37,8 +37,12 @@ class Engine:
             with requests.get(self.bing_url, params=payload, headers=headers) as response:
                 page_content = str(response.content).replace('\r\n', "")
                 soup = BeautifulSoup(page_content, "html.parser")
+                documents = soup.find_all("a", class_="iusc")
+
+                if not documents:
+                    break
         
-                for i in soup.find_all("a", class_="iusc"):
+                for i in documents:
                     if search_delta >= delta:
                         break
                     
